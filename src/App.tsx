@@ -25,17 +25,38 @@ function isValidImage(file: File) {
   return file.type.startsWith("image/") && file.size <= MAX_FILE_SIZE;
 }
 
-async function uploadToCloudinary(file: File): Promise<string> {
-  const data = new FormData();
-  data.append("file", file);
-  data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
-  const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
-    { method: "POST", body: data }
-  );
-  if (!res.ok) throw new Error("Image upload failed");
+async function toBase64(file: File): Promise<string> {
+  return await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result ?? "");
+      const base64 = result.split(",")[1];
+      if (!base64) return reject(new Error("Failed to encode file"));
+      resolve(base64);
+    };
+    reader.onerror = () => reject(new Error("Failed to read file"));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function uploadToGoogleDrive(file: File, entrantName: string, fileType: "receipt" | "story"): Promise<string> {
+  const fileBase64 = await toBase64(file);
+  const res = await fetch(import.meta.env.VITE_GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "uploadFile",
+      entrantName,
+      fileType,
+      fileName: file.name,
+      mimeType: file.type,
+      fileBase64,
+    }),
+  });
+
+  if (!res.ok) throw new Error("Google Drive upload failed");
   const json = await res.json();
-  return json.secure_url as string;
+  if (!json.success || !json.fileUrl) throw new Error(json.error || "Google Drive upload failed");
+  return json.fileUrl as string;
 }
 
 async function submitToSupabase(payload: Record<string, string>) {
@@ -221,9 +242,9 @@ function EntryFormDialog({ onClose }: { onClose: () => void }) {
     setSubmitting(true);
     setError("");
     try {
-      const receiptUrl = await uploadToCloudinary(receiptFile!);
+      const receiptUrl = await uploadToGoogleDrive(receiptFile!, form.fullName, "receipt");
       let storyUrl = "";
-      if (storyFile) storyUrl = await uploadToCloudinary(storyFile);
+      if (storyFile) storyUrl = await uploadToGoogleDrive(storyFile, form.fullName, "story");
       await submitToSupabase({
         submittedAt: new Date().toISOString(),
         fullName: form.fullName,
