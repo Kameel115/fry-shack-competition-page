@@ -242,8 +242,9 @@ function EntryFormDialog({ onClose }: { onClose: () => void }) {
         storyScreenshotUrl: storyUrl,
       });
       setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please try again.");
+    } catch (err) {
+      console.error("Submission failed:", err);
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -476,11 +477,11 @@ function App() {
         {/* Logos */}
         <div className="absolute left-6 top-6 z-20 flex items-stretch border border-white/20 shadow-md sm:left-10 sm:top-10 lg:left-1/2 lg:-translate-x-1/2">
           <div className="flex items-center justify-center bg-black px-6 py-4 sm:px-8 sm:py-5">
-            <img src={fryShackLogo} alt="The Fry Shack logo" className="h-16 w-auto object-contain sm:h-20" />
+            <img src={fryShackLogo} alt="The Fry Shack logo" className="h-20 w-auto object-contain sm:h-24" />
           </div>
           <div className="w-px bg-white/20" />
           <div className="flex items-center justify-center bg-white px-6 py-4 sm:px-8 sm:py-5">
-            <img src={globeTrotterLogo} alt="The Globe Trotter logo" className="h-14 w-auto object-contain sm:h-18" />
+            <img src={globeTrotterLogo} alt="The Globe Trotter logo" className="h-16 w-auto object-contain sm:h-20" />
           </div>
         </div>
 
@@ -496,9 +497,9 @@ function App() {
               className="text-[3.5rem] font-black leading-[0.95] tracking-[-0.02em] sm:text-[5.5rem] md:text-[7rem]"
               style={{ textShadow: "0 2px 6px rgba(0,0,0,0.95), 0 6px 30px rgba(0,0,0,0.75)" }}
             >
-              <span className="text-[#FFB800]">The Social</span>
+              <span className="text-[#3A88D1]">The Social</span>
               <br />
-              <span className="text-[#D32F2F]">Giveaway.</span>
+              <span className="text-[#F2B127]">Giveaway.</span>
             </h1>
 
             <p className="mt-8 max-w-xl text-lg font-medium leading-relaxed tracking-wide text-[#E0E0E0] sm:text-xl md:text-2xl">
