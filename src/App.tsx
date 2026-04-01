@@ -89,19 +89,6 @@ function IgIcon() {
   return <img src={igIcon} alt="Instagram" className="h-5 w-5 shrink-0 object-contain" />;
 }
 
-// ── Close button ──────────────────────────────────────────────────────────────
-function CloseBtn({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/70 transition hover:bg-white/20 hover:text-white"
-      aria-label="Close"
-    >
-      ✕
-    </button>
-  );
-}
-
 // ── shared sheet wrapper ──────────────────────────────────────────────────────
 function BottomSheet({ onClose, children }: { onClose: () => void; children: React.ReactNode }) {
   return (
