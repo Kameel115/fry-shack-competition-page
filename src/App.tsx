@@ -156,7 +156,7 @@ function RequirementsDialog({
         <div className="mb-5 space-y-3 rounded-2xl border border-white/8 bg-white/5 p-4 text-sm">
           <p className="flex gap-2.5 text-[#E0E0E0]">
             <span className="shrink-0">✅</span>
-            <span>Follow <strong className="text-white">@TheFryShack</strong> & <strong className="text-white">@TheGlobeTrotter</strong> on Instagram</span>
+            <span>Follow <strong className="text-white">@The_Fry_Shack</strong> & <strong className="text-white">@The_Globetrotters_Gram</strong> on Instagram</span>
           </p>
           <div className="h-px bg-white/8" />
           <p className="flex gap-2.5 text-[#E0E0E0]">
@@ -475,7 +475,7 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
 
         {/* Logos */}
-        <div className="absolute left-6 top-6 z-20 flex items-stretch border border-white/20 shadow-md sm:left-10 sm:top-10 lg:left-1/2 lg:-translate-x-1/2">
+        <div className="absolute left-6 top-6 z-20 flex items-stretch border border-white/20 shadow-md sm:left-10 sm:top-10">
           <div className="flex items-center justify-center bg-black px-6 py-4 sm:px-8 sm:py-5">
             <img src={fryShackLogo} alt="The Fry Shack logo" className="h-20 w-auto object-contain sm:h-24" />
           </div>
@@ -524,22 +524,22 @@ function App() {
 
             <div className="mt-10 flex flex-row flex-wrap gap-3 sm:flex-nowrap lg:justify-center">
               <a
-                href="https://instagram.com/thefryshack"
+                href="https://instagram.com/The_Fry_Shack"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-bold text-[#E0E0E0] backdrop-blur-sm transition hover:bg-white/20 lg:px-7"
               >
                 <IgIcon />
-                @TheFryShack
+                @The_Fry_Shack
               </a>
               <a
-                href="https://instagram.com/theglobetrotter"
+                href="https://instagram.com/The_Globetrotters_Gram"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-bold text-[#E0E0E0] backdrop-blur-sm transition hover:bg-white/20 lg:px-7"
               >
                 <IgIcon />
-                @TheGlobeTrotter
+                @The_Globetrotters_Gram
               </a>
             </div>
           </div>
