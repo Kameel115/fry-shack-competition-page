@@ -503,7 +503,7 @@ function App() {
             </h1>
 
             <p className="mt-8 max-w-xl text-lg font-medium leading-relaxed tracking-wide text-[#E0E0E0] sm:text-xl md:text-2xl">
-              Enter our social giveaway for a chance to win an exciting local experience!
+              Stand a chance to win a Midlands weekend getaway for 2
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4 text-sm font-bold sm:mt-12 sm:max-w-xl sm:flex-nowrap sm:text-base lg:mx-auto lg:justify-center">
